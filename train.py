@@ -48,7 +48,7 @@ def main():
     torch.set_num_threads(4)  # Adjust based on your CPU
 
     # Define hyperparameters
-    batch_size = 4  # Process one volume at a time
+    batch_size = 16  # Process one volume at a time
     num_epochs = 10
     learning_rate = 1e-4
 
