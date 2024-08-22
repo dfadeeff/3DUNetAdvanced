@@ -101,8 +101,8 @@ def main():
 
             modalities = torch.stack(normalized_modalities).unsqueeze(0)
 
-            inputs = modalities[:, :3, :, :, :]  # T1ce, T2, FLAIR
-            target = modalities[:, 3, :, :, :]  # T1
+            inputs = modalities[:, [0, 2, 3], :, :, :].to(device)  # FLAIR, T1c, T2
+            target = modalities[:, 1, :, :, :].to(device)  # T1
 
             # Visualize input
             if batch_idx == 0:
@@ -143,8 +143,8 @@ def main():
 
                 modalities = torch.stack(normalized_modalities).unsqueeze(0)
 
-                inputs = modalities[:, :3, :, :, :]
-                target = modalities[:, 3, :, :, :]
+                inputs = modalities[:, [0, 2, 3], :, :, :].to(device)  # FLAIR, T1c, T2
+                target = modalities[:, 1, :, :, :].to(device)  # T1
 
                 outputs = model(inputs)
                 loss = criterion(outputs, target.unsqueeze(1))
